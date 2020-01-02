@@ -1,0 +1,26 @@
+stages:
+- name: doSomething
+  steps:
+  - runScriptConfig:
+      image: python:latest
+      shellScript: |-
+        #make sure python3 and pip are installed
+        sudo apt-get install python3 python3-pip
+
+        #now install Django
+        pip3 install Django
+
+        #now you can perform other required tasks
+- name: doSomethingElse
+  steps:
+  - runScriptConfig:
+      image: python:latest
+      shellScript: ls -a
+timeout: 60
+notification:
+  recipients:
+  - recipient: raul.gherman@yandex.com
+    notifier: c-nhxsh:n-x4rl8
+  condition:
+  - Success
+  - Failed
